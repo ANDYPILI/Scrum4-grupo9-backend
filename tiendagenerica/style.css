@@ -1,0 +1,9 @@
+body {
+  height:665px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+.link { color: #000000; }
+.link:hover { color: #31012C; }
+
