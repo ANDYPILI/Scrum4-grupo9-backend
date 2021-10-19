@@ -392,7 +392,7 @@
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
 		var user = document.getElementById("cedula_usuario").value;
-		req.open('GET', 'http://localhost:8080/consultarusuario?usuario=' +
+		req.open('GET', 'http://localhost:8080/consultarusuario?cedula_usuario=' +
 			user, false);
 		req.send(null);
 		var usuario = null;
