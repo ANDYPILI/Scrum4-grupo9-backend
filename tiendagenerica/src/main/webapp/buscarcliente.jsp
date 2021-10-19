@@ -147,8 +147,6 @@
 					clientes = JSON.parse(req.responseText);
 				console.log(JSON.parse(req.responseText));
 				
-			
-
 				var element = document.getElementById("error");
 				element.classList.add("visually-hidden");
 				var element2 = document.getElementById("correcto");

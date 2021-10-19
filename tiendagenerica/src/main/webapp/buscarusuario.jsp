@@ -47,9 +47,9 @@
 			<i class="fas fa-truck"></i> Proveedores</button>
 			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -72,7 +72,7 @@
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon4">Usuario a buscar</span> <input
 						type="text" class="form-control"
-						placeholder="Inserte username aqui..."
+						placeholder="Inserte cedula del usuario"
 						aria-describedby="basic-addon4" required id="usersearch" >
 				</div>
 				
@@ -141,7 +141,7 @@
 				var req = new XMLHttpRequest();
 				var coincidencia = false;
 				var user=   document.getElementById("usersearch").value;
-				req.open('GET', 'http://localhost:8080/consultarusuario?usuario='+user, false);
+				req.open('GET', 'http://localhost:8080/consultarusuario?cedula_usuario='+user, false);
 				req.send(null);
 				var usuario = null;
 				if (req.status == 200)

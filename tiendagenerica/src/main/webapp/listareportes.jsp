@@ -30,32 +30,33 @@
 
 
 <script>
-	var baseurl = "http://localhost:8080/listarventa";
-	function loadventas() {
+	var baseurl = "http://localhost:8080/listardetalleventas";
+	function loaddetalleventas() {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.open("GET", baseurl, true);
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				var ventas = JSON.parse(xmlhttp.responseText);
-				var tbltop = "<table class='table table-dark table-striped'><tr><th>Codigo</th><th>IVA</th><th>NIT Proveedor</th><th>Nombre Producto</th><th>Precio compra</th><th>Precio venta</th></tr>";
+				var detalleventa = JSON.parse(xmlhttp.responseText);
+				var tbltop = "<table class='table table-dark table-striped'><tr><th>codigo_detalle_venta</th><th>cantidad_producto</th><th>codigo_producto</th><th>codigo_venta</th><th>valoriva</th><th>total_venta</th><th>valor_venta</th></tr>";
 				var main = "";
-				for (i = 0; i < productos.length; i++) {
-					main += "<tr><td>" + productos[i].codigo_producto
-							+ "</td><td>" + productos[i].iva_compra
-							+ "</td><td>" + productos[i].nit
-							+ "</td><td>" + productos[i].nombre_producto 
-							+ "</td><td>" + productos[i].precio_compra 
-							+ "</td><td>" + productos[i].precio_venta + "</td></tr>";
+				for (i = 0; i < detalleventas.length; i++) {
+					main += "<tr><td>" + detalleventas[i].codigo_detalle_venta
+							+ "</td><td>" + detalleventas[i].cantidad_producto          
+							+ "</td><td>" + detalleventas[i].codigo_producto
+							+ "<tr><td>" + ventas[i].codigo_venta
+							+ "</td><td>" + detalleventas[i].valoriva
+							+ "</td><td>" + detalleventas[i].total_venta + "</td><td>"
+							+ detalleventas[i].valor_venta + "</td></tr>";
 				}
 				var tblbottom = "</table>";
 				var tbl = tbltop + main + tblbottom;
-				document.getElementById("productosinfo").innerHTML = tbl;
+				document.getElementById("detalleventainfo").innerHTML = tbl;
 			}
 		};
 		xmlhttp.send();
 	}
 	window.onload = function() {
-		loadproductos();
+		loaddetalleventas();
 	}
 </script>
 
@@ -92,12 +93,12 @@
 	<div style="padding-left: 5px;">
 	
 		<div style="padding-left: 5px">
-		<h3 class="card-header">Tabla ventas</h3>
+		<h3 class="card-header">Tabla detalle ventas</h3>
 		<div class="container">
 			<div class="container">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
-					<div class="col align-self-center" id="clientesinfo">
+					<div class="col align-self-center" id="detalleventainfo">
 					
 					</div>
 	
@@ -108,15 +109,15 @@
 			<div class="container">
         
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/listaclientes.jsp'"><h5>lista Clientes</h5></a>
+				<a href="#" class="link" onclick="window.location.href='/reporteclientes.jsp'"><h5>lista Clientes</h5></a>
 				</div>
 
         <div class="row">
-				<a href="#" class="link" onclick="window.location.href='/listaproductos.jsp'"><h5>lista productos</h5></a>
+				<a href="#" class="link" onclick="window.location.href='/reporteusuarios.jsp'"><h5>lista usuarios</h5></a>
 		
 				</div>
         <div class="row">
-				<a href="#" class="link" onclick="window.location.href='/listaventas.jsp'"><h5>lista de ventas por cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='/reporteventas.jsp'"><h5>lista de ventas por cliente</h5></a>
 		
 				</div>
 			</div>
