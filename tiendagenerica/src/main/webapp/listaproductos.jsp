@@ -93,6 +93,11 @@
 		<div style="padding-left: 5px">
 		<h3 class="card-header">Tabla Productos</h3>
 		<div class="container">
+			<div class="row">
+				<a href="#" class="link" onclick="window.location.href='/insertarproducto.jsp'"><h5>Agregar productos</h5></a>
+			</div>
+		</div>
+		<div class="container">
 			<div class="container">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
@@ -102,13 +107,9 @@
 	
 				</div>
 			</div>
-		<center>
-		<div class="container">
-				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarproducto.jsp'"><h5>Agregar productos</h5></a>
-		</div>
-	</div>
-	</center>
+	
+
+
 
 	<nav class="navbar fixed-bottom navbar-dark bg-dark">
 		<div class="row justify-content-between">
