@@ -31,32 +31,33 @@
 
 
 <script>
-	var baseurl = "http://localhost:8080/listarventa";
-	function loadventas() {
+	var baseurl = "http://localhost:8080/listardetalleventas";
+	function loaddetalleventas() {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.open("GET", baseurl, true);
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				var ventas = JSON.parse(xmlhttp.responseText);
-				var tbltop = "<table class='table table-dark table-striped'><tr><th>Codigo</th><th>IVA</th><th>NIT Proveedor</th><th>Nombre Producto</th><th>Precio compra</th><th>Precio venta</th></tr>";
+				var detalleventas = JSON.parse(xmlhttp.responseText);
+				var tbltop = "<table class='table table-dark table-striped'><tr><th>Codigo</th><th>Cantidad</th><th>Producto</th><th>Cod_venta</th><th>valor_total</th><th>IVA</th><th>valor_venta</th></tr>";
 				var main = "";
-				for (i = 0; i < productos.length; i++) {
-					main += "<tr><td>" + productos[i].codigo_producto
-							+ "</td><td>" + productos[i].iva_compra
-							+ "</td><td>" + productos[i].nit
-							+ "</td><td>" + productos[i].nombre_producto 
-							+ "</td><td>" + productos[i].precio_compra 
-							+ "</td><td>" + productos[i].precio_venta + "</td></tr>";
+				for (i = 0; i < detalleventas.length; i++) {
+					main += "<tr><td>" + detalleventas[i].codigo_detalle_venta
+							+ "</td><td>" + detalleventas[i].cantidad_producto
+							+ "</td><td>" + detalleventas[i].codigo_producto
+							+ "</td><td>" + detalleventas[i].codigo_venta
+							+ "</td><td>" + detalleventas[i].valor_total
+							+ "</td><td>" + detalleventas[i].valoriva 
+							+ "</td><td>" + detalleventas[i].valor_venta + "</td></tr>";
 				}
 				var tblbottom = "</table>";
 				var tbl = tbltop + main + tblbottom;
-				document.getElementById("productosinfo").innerHTML = tbl;
+				document.getElementById("detalleventasinfo").innerHTML = tbl;
 			}
 		};
 		xmlhttp.send();
 	}
 	window.onload = function() {
-		loadproductos();
+		loaddetalleventas();
 	}
 </script>
 
@@ -98,7 +99,7 @@
 			<div class="container">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
-					<div class="col align-self-center" id="clientesinfo">
+					<div class="col align-self-center" id="detalleventasinfo">
 					
 					</div>
 	
