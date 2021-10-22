@@ -8,6 +8,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Insertando productos</title>
@@ -36,20 +37,17 @@
 <!-- Navbar-->
 	<nav class="navbar navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
-			<nav class="navbar navbar-dark bg-dark">
-		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -81,7 +79,7 @@
 		<center>
 		<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/listaproductos.jsp'"><h5>Listar productos</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'"><h5>Listar productos</h5></a>
 		</div>
 		</div>
 		</center>
@@ -96,6 +94,9 @@
 	</nav>
 	<script>
 		function subirArchivo() {
+			var getUrl = window.location;
+			var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+			
 
 			try {
 
@@ -111,8 +112,8 @@
 					var arrayLineas = text.split("\n");
 
 					var xhr = new XMLHttpRequest();
-					xhr.open("DELETE",
-							"http://localhost:8080/eliminartodoproducto",true);
+					xhr.open("DELETE", baseUrl+
+							"//eliminartodoproducto",true);
 					xhr.send();
 
 					for (var i = 0; i < arrayLineas.length; i += 1) {
@@ -134,8 +135,7 @@
 						formData.append("iva_compra", arraydatos[4]);
 						formData.append("precio_venta", arraydatos[5]);
 						var xhr = new XMLHttpRequest();
-						xhr.open("POST",
-								"http://localhost:8080/registrarproducto");
+						xhr.open("POST",baseUrl+"/registrarproducto");
 
 						xhr.send(formData);
 					}

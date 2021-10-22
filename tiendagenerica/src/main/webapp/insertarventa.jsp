@@ -8,6 +8,7 @@
 	<!-- paquete de caracteres -->
 	<meta charset="utf-8">
 	<!-- Tamaño de la pantalla -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width">
 	<!-- titulo de la pestaña -->
 	<title>Registrar venta</title>
@@ -23,21 +24,14 @@
 	<link href="style.css" rel="stylesheet" type="text/css" />
 
 
-	<!--    
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-<link href="css/styles.css" rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  -->
+
 	<script>
 		window.onload = function() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+			
 		var req = new XMLHttpRequest();
-		req.open('GET', 'http://localhost:8080/contadorventa', false);
+		req.open('GET', baseUrl+'/contadorventa', false);
 		req.send(null);
 		var cont = null;
 		if (req.status == 200)
@@ -56,44 +50,27 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
         <div class="container">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
-        <i class="fas fa-users"></i> Usuarios</button>
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
-        <i class="fas fa-address-book"></i> Clientes</button>
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
-        <i class="fas fa-truck"></i> Proveedores</button>
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
-        <i class="fas fa-apple-alt"></i> Productos</button>
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaventas.jsp'">
-        <i class="fas fa-money-check-alt"></i> Ventas</button>
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listareportes.jsp'">
-        <i class="fas fa-clipboard-list"></i> Reportes</button>
-        </div>
+        	<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
+			<i class="fas fa-users"></i> Usuarios</button>
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
+			<i class="fas fa-address-book"></i> Clientes</button>
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
+			<i class="fas fa-truck"></i> Proveedores</button>
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
+			<i class="fas fa-apple-alt"></i> Productos</button>
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
+			<i class="fas fa-money-check-alt"></i> Ventas</button>
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
+			<i class="fas fa-clipboard-list"></i> Reportes</button>
+		</div>
 	    </nav>
 		</div>
 	</nav>
 
 
-	<!--<div id="layoutSidenav_content">
-		<main>
-
-			<div w3-include-html="snippets/sidenav.html"></div>
-
-			<div
-				class="container-fluid px-4 animate__animated animate__bounceInLeft">
-				<h1 class="mt-4">Registrar nueva venta</h1>
-				<ol class="breadcrumb mb-4">
-					<li class="breadcrumb-item active"></li>
-				</ol>
-
--->
 	<div style="padding-left: 5px">
 		<h3 class="card-header">Registrar una nueva venta</h3>
 		<div class="container"></div>
-
-				<!--<div class="card bg-dark text-white">
-        <img class="card-img" src="https://cdn.pixabay.com/photo/2016/02/17/19/08/lotus-1205631_960_720.jpg" opacity=0.7 alt="Card image">
-        <div class="card-img-overlay">-->
 
 			<h3>Numero de registro</h3>
 <!--genera el consecutivo de la venta -->
@@ -314,11 +291,9 @@
 									</div>
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 										<div class="alert alert-success visually-hidden" role="alert"
-											id="correcto">Datos insertados con exito, recargue la
-											pagina para una nueva venta</div>
+											id="correcto">Datos insertados con exito </div>
 										<div class="alert alert-danger visually-hidden" role="alert"
-											id="error">Error al insertar datos, recargue la pagina
-											y reintente de nuevo</div>
+											id="error">Error al insertar datos, ingrese nuevamente</div>
                 	</div>
                 </div>
 							</form>
@@ -336,7 +311,7 @@
 
 
 	</div>
-<nav class="navbar fixed-bottom navbar-dark bg-dark">
+<nav class="navbar-dark bg-dark">
 		<div class="row justify-content-between">
 			<div class="col-4">
 				<a class="navbar-brand links" href="#">
@@ -360,11 +335,14 @@
 
 	<script>
 	function traerNombreCliente() {
-		
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
 		var client = document.getElementById("cedula_cliente").value;
-		req.open('GET', 'http://localhost:8080/consultarcliente?cedula_cliente=' +
+		req.open('GET', baseUrl+'/consultarcliente?cedula_cliente=' +
 			client, false);
 		req.send(null);
 		var clientes = null;
@@ -388,11 +366,14 @@
 	}
 
 	function traerNombreUsuario() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
 		var user = document.getElementById("cedula_usuario").value;
-		req.open('GET', 'http://localhost:8080/consultarusuario?cedula_usuario=' +
+		req.open('GET', baseUrl+'/consultarusuario?cedula_usuario=' +
 			user, false);
 		req.send(null);
 		var usuario = null;
@@ -416,10 +397,14 @@
 	var precio1 = 0.0;
 
 	function cargarProducto1() {
+		
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var prod1 = document.getElementById("codigo_producto1").value;
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
-		req.open('GET', 'http://localhost:8080/consultarproducto?code=' +
+		req.open('GET', baseUrl+'/consultarproducto?code=' +
 			prod1, false);
 		req.send(null);
 		var producto1 = null;
@@ -447,10 +432,13 @@
 	var precio2 = 0.0;
 
 	function cargarProducto2() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var prod2 = document.getElementById("codigo_producto2").value;
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
-		req.open('GET', 'http://localhost:8080/consultarproducto?code=' +
+		req.open('GET', baseUrl+'/consultarproducto?code=' +
 			prod2, false);
 		req.send(null);
 		var producto2 = null;
@@ -476,10 +464,13 @@
 	var precio3 = 0.0;
 
 	function cargarProducto3() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var prod3 = document.getElementById("codigo_producto3").value;
 		var req = new XMLHttpRequest();
 		var coincidencia = false;
-		req.open('GET', 'http://localhost:8080/consultarproducto?code=' +
+		req.open('GET', baseUrl+'/consultarproducto?code=' +
 			prod3, false);
 		req.send(null);
 		var producto3 = null;
@@ -503,6 +494,7 @@
 	}
 
 	function calcularPrecio1() {
+		
 		var cantidad = document.getElementById("cant1").value;
 		var valortotal = 0.0;
 		if (cantidad == "" || cantidad == null) {
@@ -558,6 +550,9 @@
 	}
 
 	function registrar() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		try {
 
 			formData = new FormData();
@@ -568,46 +563,32 @@
 			formData.append("total_venta", document.getElementById("total_venta").value);
 			formData.append("valor_venta", document.getElementById("total_venta_iva").value);
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8080/registrarventa");
+			xhr.open("POST",baseUrl+ "/registrarventa");
 			xhr.send(formData);
 
 			setTimeout(
 				function() {
-					for (i = 1; i < 4; i++) {
+					var getUrl = window.location;
+					var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+					for (i = 1; i < 9; i++) {
 						var actual = document.getElementById(("valtotal" + i.toString()).value);
 						if (actual == 0) {
 							continue;
 						} else {
 							var formData2 = new FormData();
-							//formData2.append("codigo_detalle_venta", );
-							formData2.append("cantidad_producto", document.getElementById("cant" +
-								i.toString()).value);
-							formData2.append("codigo_producto", document
-								.getElementById("codigo_producto" +
-									i
-									.toString()).value);
-							formData2
-								.append(
-									"codigo_venta",
-									document
-									.getElementById("consecutivo").value);
-							formData2.append("valor_total", document
-								.getElementById("valtotal" +
-									i.toString()).value);
-							formData2
-								.append(
-									"valor_venta",
-									document
-									.getElementById("total_venta").value);
-							formData2
-								.append(
-									"valoriva",
-									document
-									.getElementById("total_venta_iva").value);
+							var getUrl = window.location;
+							var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+							formData2.append("cantidad_producto", document.getElementById("cant" + i.toString()).value);
+							formData2.append("codigo_producto", document.getElementById("codigo_producto" + i.toString()).value);
+							formData2.append("codigo_venta", document.getElementById("consecutivo").value);
+							formData2.append("valor_total", document.getElementById("valtotal" + i.toString()).value);
+							formData2.append("valor_venta",	document.getElementById("total_venta").value);
+							formData2.append("valoriva", document.getElementById("total_venta_iva").value);
 							var xhr2 = new XMLHttpRequest();
 							xhr2
-								.open("POST",
-									"http://localhost:8080/registrardetalleventa");
+								.open("POST",+baseUrl+"/registrardetalleventa");
 							xhr2.send(formData2);
 						}
 

@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Actualizar cliente</title>
@@ -39,17 +38,17 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
 		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -114,11 +113,11 @@
 			<center>
 			<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarcliente.jsp'"><h5>Agregar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/eliminarcliente.jsp'"><h5>Eliminar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/actualizarcliente.jsp'"><h5>Actualizar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/buscarcliente.jsp'"><h5>Buscar un cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/listaclientes.jsp'"><h5>Listar todos los clientes</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/insertarcliente.jsp'"><h5>Agregar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/eliminarcliente.jsp'"><h5>Eliminar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/actualizarcliente.jsp'"><h5>Actualizar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/buscarcliente.jsp'"><h5>Buscar un cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'"><h5>Listar todos los clientes</h5></a>
 				</div>
 			</div>
 			</center>
@@ -129,17 +128,22 @@
 		<div class="row justify-content-between">
 			<div class="col-4">
 				<a class="navbar-brand links" href="#">
-					Diseñado y programado por Scrum 4 </a>
+					Diseñado y programado por Scrum 4 G9</a>
 			</div>
 		</div>
 	</nav>
+	
+	
 	<script>
-		function actualizar() {
-			
+	
+		 function actualizar() {
+			var getUrl = window.location;
+			var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+				
 			var y = document.getElementById("cedula_cliente").value;
 			var req = new XMLHttpRequest();
 			var coincidencia = false;
-			req.open('GET', 'http://localhost:8080/listarcliente', false);
+			req.open('GET', baseUrl+'/listarcliente', false);
 			req.send(null);
 			var clientes = null;
 			if (req.status == 200)
@@ -148,10 +152,10 @@
 
 			for (i = 0; i < clientes.length; i++) {
 				console.log(clientes[i].cedula_cliente);
-				console.log(clientes[i].nombre_completo);
+				
 								
 				if (clientes[i].cedula_cliente ==y ) {
-					console.log(clientes[i].cedula_cliente +" "+y);	
+					console.log(clientes[i].cedula_cliente +" "+ y);	
 					coincidencia =true
 					break;
 				}
@@ -172,7 +176,7 @@
 	 					document.getElementById("telefono").value);
 	 			
 	 			var xhr = new XMLHttpRequest();
-	 			xhr.open("PUT", "http://localhost:8080/actualizarclientes");
+	 			xhr.open("PUT", baseUrl+"/actualizarclientes");
 
 				var element = document.getElementById("error");
 				element.classList.add("visually-hidden");

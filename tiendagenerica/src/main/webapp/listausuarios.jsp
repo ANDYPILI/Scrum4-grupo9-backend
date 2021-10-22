@@ -8,6 +8,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Lista de usuarios</title>
@@ -29,10 +30,13 @@
 
 
 <script>
-	var baseurl = "http://localhost:8080/listarusuarios";
+	
 	function loadusuarios() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET", baseurl, true);
+		xmlhttp.open("GET", baseUrl+"/listarusuarios", true);
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 				var usuarios = JSON.parse(xmlhttp.responseText);
@@ -67,17 +71,17 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
 		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaventas.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listareportes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -93,26 +97,25 @@
 	<div style="padding-left: 5px;">
 	
 		<h3 class="card-header">Tabla de usuarios</h3>
-	
 			<div class="container">
+			<div class="tabla">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
 					<div class="col align-self-center" id="usuariosinfo">
 					
 					</div>
-	
 				</div>
+			</div>
 			</div>
 	
 			<center>
 			<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarusuario.jsp'"><h5>Agregar nuevo usuario</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/eliminarusuario.jsp'"><h5>Eliminar usuario</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/actualizarusuario.jsp'"><h5>Actualizar usuario</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/buscarusuario.jsp'"><h5>Buscar un usuario</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/listausuarios.jsp'"><h5>Listar todos los usuarios</h5></a>
-				</div>
+				<<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/insertarusuario.jsp'"><h5>Agregar nuevo usuario</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/eliminarusuario.jsp'"><h5>Eliminar usuario</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/actualizarusuario.jsp'"><h5>Actualizar usuario</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/buscarusuario.jsp'"><h5>Buscar un usuario</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'"><h5>Listar todos los usuarios</h5></a>
 			</div>
 			</center>
 	</div>

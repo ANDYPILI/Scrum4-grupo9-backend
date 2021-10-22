@@ -9,6 +9,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Lista de ventas</title>
@@ -30,10 +31,13 @@
 
 
 <script>
-	var baseurl = "http://localhost:8080/listardetalleventas";
+	
 	function loaddetalleventas() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET", baseurl, true);
+		xmlhttp.open("GET", baseUrl+"/listardetalleventas", true);
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 				var detalleventa = JSON.parse(xmlhttp.responseText);
@@ -43,7 +47,7 @@
 					main += "<tr><td>" + detalleventas[i].codigo_detalle_venta
 							+ "</td><td>" + detalleventas[i].cantidad_producto          
 							+ "</td><td>" + detalleventas[i].codigo_producto
-							+ "<tr><td>" + ventas[i].codigo_venta
+							+ "<tr><td>" + detalleventas[i].codigo_venta
 							+ "</td><td>" + detalleventas[i].valoriva
 							+ "</td><td>" + detalleventas[i].total_venta + "</td><td>"
 							+ detalleventas[i].valor_venta + "</td></tr>";
@@ -65,22 +69,22 @@
 
 <body background="https://cdn.pixabay.com/photo/2016/02/17/19/08/lotus-1205631_960_720.jpg" opacity=0.5>
 	<!-- Navbar-->
-	<nav class="navbar navbar-dark bg-dark">
+		<nav class="navbar navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
-		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+		<div class="container-fluid">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaventas.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listareportes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -95,7 +99,7 @@
 		<div style="padding-left: 5px">
 		<h3 class="card-header">Tabla detalle ventas</h3>
 		<div class="container">
-			<div class="container">
+			<div class="tablar">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
 					<div class="col align-self-center" id="detalleventainfo">
@@ -109,15 +113,15 @@
 			<div class="container">
         
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/reporteclientes.jsp'"><h5>lista Clientes</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/reporteclientes.jsp'"><h5>lista Clientes</h5></a>
 				</div>
 
         <div class="row">
-				<a href="#" class="link" onclick="window.location.href='/reporteusuarios.jsp'"><h5>lista usuarios</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/reporteusuarios.jsp'"><h5>lista usuarios</h5></a>
 		
 				</div>
         <div class="row">
-				<a href="#" class="link" onclick="window.location.href='/reporteventas.jsp'"><h5>lista de ventas por cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/reporteventas.jsp'"><h5>lista de ventas por cliente</h5></a>
 		
 				</div>
 			</div>

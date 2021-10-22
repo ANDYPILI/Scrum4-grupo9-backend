@@ -8,6 +8,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Insertando proveedor</title>
@@ -39,17 +40,17 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
 		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -117,11 +118,11 @@
 			<center>
 			<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarproveedor.jsp'"><h5>Agregar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/eliminarproveedor.jsp'"><h5>Eliminar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/actualizarproveedor.jsp'"><h5>Actualizar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/buscarproveedor.jsp'"><h5>Buscar un proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/listaproveedores.jsp'"><h5>Listar todos los proveedores</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/insertarproveedor.jsp'"><h5>Agregar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/eliminarproveedor.jsp'"><h5>Eliminar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/actualizarproveedor.jsp'"><h5>Actualizar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/buscarproveedor.jsp'"><h5>Buscar un proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'"><h5>Listar todos los proveedores</h5></a>
 				</div>
 			</div>
 			</center>
@@ -137,10 +138,14 @@
 	</nav>
 	<script>
 		function enviar() {
+			var getUrl = window.location;
+			var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+	
+
 			var x = document.getElementById("nit").value;
 			var req = new XMLHttpRequest();
 			var coincidencia = false;
-			req.open('GET', 'http://localhost:8080/listarProveedor', false);
+			req.open('GET', baseUrl+'/listarProveedor', false);
 			req.send(null);
 			var proveedores=null;
 			if (req.status == 200)
@@ -169,7 +174,7 @@
 	 			formData.append("ciudad",document.getElementById("ciudad").value);
 	 			
 	 			var xhr = new XMLHttpRequest();
-	 			xhr.open("POST", "http://localhost:8080/registrarproveedor");
+	 			xhr.open("POST", baseUrl+"/registrarproveedor");
 	 			
 				var element = document.getElementById("error");
 				element.classList.add("visually-hidden");

@@ -8,6 +8,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Buscar cliente</title>
@@ -39,17 +40,17 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
 		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" href="listausuarios.jsp">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
@@ -115,11 +116,11 @@
 			<center>
 			<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarcliente.jsp'"><h5>Agregar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/eliminarcliente.jsp'"><h5>Eliminar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/actualizarcliente.jsp'"><h5>Actualizar cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/buscarcliente.jsp'"><h5>Buscar un cliente</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/listaclientes.jsp'"><h5>Listar todos los clientes</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/insertarcliente.jsp'"><h5>Agregar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/eliminarcliente.jsp'"><h5>Eliminar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/actualizarcliente.jsp'"><h5>Actualizar cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/buscarcliente.jsp'"><h5>Buscar un cliente</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'"><h5>Listar todos los clientes</h5></a>
 				</div>
 			</div>
 			</center>
@@ -135,12 +136,13 @@
 	</nav>
 	<script>
 		function enviar() {
+			var getUrl = window.location;
+			var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
-				
 				var req = new XMLHttpRequest();
 				var coincidencia = false;
 				var user=   document.getElementById("usersearch").value;
-				req.open('GET', 'http://localhost:8080/consultarcliente?cedula_cliente='+user, false);
+				req.open('GET', baseUrl+'/consultarcliente?cedula_cliente='+user, false);
 				req.send(null);
 				var clientes = null;
 				if (req.status == 200)

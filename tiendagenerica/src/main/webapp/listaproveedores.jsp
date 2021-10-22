@@ -8,6 +8,7 @@
 <!-- paquete de caracteres -->
 <meta charset="utf-8">
 <!-- Tamaño de la pantalla -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width">
 <!-- titulo de la pestaña -->
 <title>Lista de Proveedores</title>
@@ -29,10 +30,13 @@
 
 
 <script>
-	var baseurl = "http://localhost:8080/listarProveedor";
+	
 	function loadproveedores() {
+		var getUrl = window.location;
+		var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET", baseurl, true);
+		xmlhttp.open("GET", baseUrl+"/listarProveedor", true);
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 				var proveedores = JSON.parse(xmlhttp.responseText);
@@ -67,49 +71,45 @@
 			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
 			<nav class="navbar navbar-dark bg-dark">
 		<div class="container">
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listausuarios.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaclientes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaclientes.jsp'">
 			<i class="fas fa-address-book"></i> Clientes</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproveedores.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'">
 			<i class="fas fa-truck"></i> Proveedores</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaproductos.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaproductos.jsp'">
 			<i class="fas fa-apple-alt"></i> Productos</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listaventas.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listaventas.jsp'">
 			<i class="fas fa-money-check-alt"></i> Ventas</button>
-			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='/listareportes.jsp'">
+			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listareportes.jsp'">
 			<i class="fas fa-clipboard-list"></i> Reportes</button>
 		</div>
 	</nav>
 		</div>
 	</nav>
 	
-	
+
+
 	<!-- contenido  -->
 	
-	<div style="padding-left: 5px;">
-	
-		<div style="padding-left: 5px">
+	<div style="padding-left: 5px">
 		<h3 class="card-header">Tabla proveedores</h3>
 		<div class="container">
-			<div class="container">
+			<div class="tabla">
 				<div class="row">
 					<!--  Aqui es donde se autogenera la tabla basado en el script -->
-					<div class="col align-self-center" id="proveedoresinfo">
-					
-					</div>
-	
+				<div class="col align-self-center" id="proveedoresinfo"></div>
 				</div>
 			</div>
-	
+		</div> 
 		<center>
 			<div class="container">
 				<div class="row">
-				<a href="#" class="link" onclick="window.location.href='/insertarproveedor.jsp'"><h5>Agregar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/eliminarproveedor.jsp'"><h5>Eliminar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/actualizarproveedor.jsp'"><h5>Actualizar proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/buscarproveedor.jsp'"><h5>Buscar un proveedor</h5></a>
-				<a href="#" class="link" onclick="window.location.href='/listaproveedores.jsp'"><h5>Listar todos los proveedores</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/insertarproveedor.jsp'"><h5>Agregar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/eliminarproveedor.jsp'"><h5>Eliminar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/actualizarproveedor.jsp'"><h5>Actualizar proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/buscarproveedor.jsp'"><h5>Buscar un proveedor</h5></a>
+				<a href="#" class="link" onclick="window.location.href='<%=request.getContextPath()%>/listaproveedores.jsp'"><h5>Listar todos los proveedores</h5></a>
 				</div>
 			</div>
 			</center>

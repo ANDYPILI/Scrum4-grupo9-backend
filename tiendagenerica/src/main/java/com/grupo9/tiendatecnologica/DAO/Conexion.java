@@ -5,12 +5,16 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que permite conectar con la base de datos
  */
 public class Conexion {
 
+	Logger logger= Logger.getLogger("com.grupo9.tiendatecnologica.DAO.Conexion");
+	
 	/** Parametros de conexion */
 	static String nombre_base_datos = "g9e4";
 	//root
@@ -32,30 +36,35 @@ public class Conexion {
 	/** Constructor de DbConnection */
 	public Conexion() {
 		try {
-			// obtenemos el driver de para mariadb par mysql es
+			// obtenemos el driver de para mysql
 			Class.forName("org.mariadb.jdbc.Driver");
 			// obtenemos la conexión
 			connection = DriverManager.getConnection(url, usuariobd, clavebd);
 			// si hay conexión correcta mostrar información en consola
 			if (connection != null) {
-				System.out.println("Conexión a base de datos " + nombre_base_datos + " OK\n");
-
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+				System.out.println("------------------------------------------------------");
+				System.out.println("Conexión a base de datos " + nombre_base_datos + " OK");
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'a las' HH:mm:ss z");
 				Date date = new Date(System.currentTimeMillis());
 				System.out.println(formatter.format(date));
 				System.out.println(url);
-
+				System.out.println("------------------------------------------------------");
 			}
 
 		} catch (SQLException e) {
 			// error de la base de datos
 			System.out.println(e);
+			logger.log(Level.WARNING, "Algo paso SQL");
+	
 		} catch (ClassNotFoundException e) {
 			// error en carga de clases
 			System.out.println(e);
+			logger.log(Level.WARNING, "Algo paso CLASS");
 		} catch (Exception e) {
 			// cualquier otro error
 			System.out.println(e);
+			logger.log(Level.WARNING, "Otra cosa");
 		}
 	}
 
