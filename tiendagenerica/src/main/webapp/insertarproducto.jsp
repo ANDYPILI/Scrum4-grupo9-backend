@@ -35,7 +35,10 @@
 
 <body background="https://cdn.pixabay.com/photo/2016/02/17/19/08/lotus-1205631_960_720.jpg" opacity=0.5>
 <!-- Navbar-->
-	<nav class="navbar navbar-dark bg-dark">
+		<nav class="navbar navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand links" href="index.html"><i class="fas fa-chalkboard-teacher"></i>Tienda Tecnologica</a>
+			<nav class="navbar navbar-dark bg-dark">
 		<div class="container-fluid">
 			<button type="button" class="btn btn-outline-primary" onclick="window.location.href='<%=request.getContextPath()%>/listausuarios.jsp'">
 			<i class="fas fa-users"></i> Usuarios</button>
